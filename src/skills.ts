@@ -1,0 +1,2 @@
+export const skills = ["React", "Node.js", "Express", "Nest", "Typescript", "Golang", "PostgreSQL", "MongoDB", "Next.js", "Tailwind", "Redux",
+    "Zustand", "Firebase", "GraphQL", "Git", "Docker", "Vercel", , "OneSignal", "Mailgun"]
