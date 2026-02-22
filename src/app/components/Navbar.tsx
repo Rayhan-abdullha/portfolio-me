@@ -17,14 +17,11 @@ const Navbar = () => {
           </motion.div>
 
           <div className="hidden md:flex items-center gap-8">
-            {["Projects", "Skills"].map((item) => (
+            {["Projects", "Skills", "About"].map((item) => (
               <a key={item} href={`#${item.toLowerCase()}`} className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
                 {item}
               </a>
             ))}
-                <Link href="/about" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
-              About
-            </Link>
             <a href="https://drive.google.com/file/d/1elKi72H6KTHWoo6Wp0BsYeeaAxQlyLYe/view?usp=sharing" target='blank' download className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105">
               <Download size={16} /> Resume
             </a>
@@ -47,10 +44,9 @@ const Navbar = () => {
             <div className="flex flex-col gap-6 font-bold">
               <a href="#projects" className="text-sm font-medium text-gray-400 hover:text-white transition-colors" onClick={() => setIsMenuOpen(false)}>Projects</a>
               <a href="#skills" className="text-sm font-medium text-gray-400 hover:text-white transition-colors" onClick={() => setIsMenuOpen(false)}>Skills</a>
-               <Link href="/about" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
-              About
-            </Link>
-              <a href='https://drive.google.com/file/d/1elKi72H6KTHWoo6Wp0BsYeeaAxQlyLYe/view?usp=sharing'  target='blank' className="bg-blue-600 px-4 py-2 rounded-2xl flex items-center justify-center gap-2">
+              <a href="#about" className="text-sm font-medium text-gray-400 hover:text-white transition-colors" onClick={() => setIsMenuOpen(false)}>About</a>
+              
+              <a href='https://drive.google.com/file/d/1elKi72H6KTHWoo6Wp0BsYeeaAxQlyLYe/view?usp=sharing' target='blank' className="bg-blue-600 px-4 py-2 rounded-2xl flex items-center justify-center gap-2">
                 <Download size={20} /> Resume
               </a>
             </div>
