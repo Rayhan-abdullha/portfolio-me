@@ -46,7 +46,7 @@ export default async function AdminDashboard() {
                     <img 
                       src={post.coverImage} 
                       className="w-12 h-12 rounded-lg object-cover grayscale group-hover:grayscale-0 transition-all" 
-                      alt="" 
+                      alt="not found" 
                     />
                     <div>
                       <p className="font-bold text-sm md:text-base leading-none mb-1">{post.title}</p>

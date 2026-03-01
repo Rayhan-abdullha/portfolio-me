@@ -1,16 +1,56 @@
 'use client';
-import { useState } from 'react';
+
+import { useState, useRef, useEffect } from 'react';
+import { 
+  Plus, X, FileText, Heading, Image as ImageIcon, 
+  Video, Quote, Send, Trash2, LayoutDashboard, FilePlus 
+} from 'lucide-react';
 import { BlogBlock, BlockType, BlogPost } from '@/types/blog';
 import { createBlogAction } from '../action';
+import crypto from 'crypto';
 
-export default function CreatePost() {
+/**
+ * AUTO-EXPANDING TEXTAREA COMPONENT
+ * Handles line breaks and grows with content (Facebook-style)
+ */
+const AutoTextArea = ({ value, onChange, placeholder }: any) => {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const adjustHeight = () => {
+    const element = textareaRef.current;
+    if (element) {
+      element.style.height = 'auto';
+      element.style.height = `${element.scrollHeight}px`;
+    }
+  };
+
+  useEffect(() => {
+    adjustHeight();
+  }, [value]);
+
+  return (
+    <textarea
+      ref={textareaRef}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder={placeholder}
+      className="w-full bg-transparent outline-none resize-none overflow-hidden text-lg leading-relaxed whitespace-pre-wrap placeholder:opacity-30"
+      rows={1}
+    />
+  );
+};
+
+export default function UnifiedAdminEditor() {
   const [title, setTitle] = useState('');
-  const [coverImage, setCoverImage] = useState(''); // Added Cover Image state
+  const [coverImage, setCoverImage] = useState('');
   const [blocks, setBlocks] = useState<BlogBlock[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // BLOCK LOGIC
   const addBlock = (type: BlockType) => {
     const newBlock: BlogBlock = { id: Date.now().toString(), type, content: '' };
     setBlocks([...blocks, newBlock]);
+    setIsModalOpen(false);
   };
 
   const updateBlock = (id: string, value: string) => {
@@ -23,93 +63,148 @@ export default function CreatePost() {
 
   const handlePublish = async () => {
     if (!title || blocks.length === 0) return alert("Title and content required!");
-
-    const slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
+    
+    let slug = title.toLowerCase().trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/[\s_-]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    
+    if (!slug) {
+      const id = crypto.randomBytes(4).toString('hex');
+      slug = `untitled-${id}`;
+    }
     
     const newPost: BlogPost = {
       id: Date.now().toString(),
       title,
       slug,
-      coverImage: coverImage || 'https://images.unsplash.com/photo-1498050108023-c5249f4df085',
+      coverImage: coverImage || 'https://modulex.com/wp-content/uploads/2022/10/Modulex-Blog-Thumbnail-Image.jpg',
       date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-      readTime: `${Math.ceil(blocks.length * 0.5)} min`, // Simple calculation
+      readTime: `${Math.ceil(blocks.length * 0.5)} min`,
       excerpt: blocks.find(b => b.type === 'paragraph')?.content.slice(0, 150) || '',
       blocks
     };
 
     await createBlogAction(newPost);
+    alert("Post Published Successfully!");
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 md:p-10 bg-[--background] text-[--foreground]">
-      
-      {/* Title Input - Adjusted text size for mobile */}
-      <input 
-        className="text-3xl md:text-5xl font-black bg-transparent border-b border-zinc-800 w-full mb-4 md:mb-6 outline-none pb-4" 
-        placeholder="Blog Title" 
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
+    <div className="min-h-screen bg-[--background] text-[--foreground] pb-32">
+      {/* HEADER SECTION */}
+      <div className="max-w-4xl mx-auto px-6 pt-10 md:pt-20">
+        <input 
+          className="text-4xl md:text-6xl font-black bg-transparent border-none w-full mb-6 outline-none placeholder:opacity-20 tracking-tighter" 
+          placeholder="Enter a title..." 
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
 
-      {/* Cover Image Input */}
-      <input 
-        className="text-base md:text-lg bg-transparent border-b border-zinc-800 w-full mb-8 md:mb-10 outline-none pb-2 opacity-70" 
-        placeholder="Cover Image URL..." 
-        value={coverImage}
-        onChange={(e) => setCoverImage(e.target.value)}
-      />
+        <input 
+          className="text-sm md:text-base bg-transparent border-b border-zinc-800/50 w-full mb-12 outline-none pb-2 opacity-50 focus:opacity-100 transition-opacity" 
+          placeholder="Paste Cover Image URL (Unsplash/Direct link)..." 
+          value={coverImage}
+          onChange={(e) => setCoverImage(e.target.value)}
+        />
 
-      <div className="space-y-4 md:space-y-6 mb-24 md:mb-10">
-        {blocks.map((block) => (
-          <div key={block.id} className="relative group p-3 md:p-4 border border-zinc-800 rounded-xl bg-zinc-900/10">
-            <div className="flex justify-between items-center mb-2">
-                <span className="text-[10px] font-bold uppercase tracking-widest opacity-40">{block.type}</span>
-                <button 
-                  onClick={() => removeBlock(block.id)} 
-                  className="text-red-500 text-xs md:opacity-0 md:group-hover:opacity-100 transition-opacity p-1"
-                >
-                  Delete
-                </button>
+        {/* DYNAMIC CONTENT AREA */}
+        <div className="space-y-10">
+          {blocks.map((block) => (
+            <div key={block.id} className="group relative animate-in fade-in slide-in-from-bottom-2 duration-300">
+              <div className="absolute -left-12 top-1 flex flex-col items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                 <button onClick={() => removeBlock(block.id)} className="text-zinc-600 hover:text-red-500 p-2 cursor-pointer">
+                    <Trash2 size={16} />
+                 </button>
+              </div>
+
+              {/* RENDER BY TYPE */}
+              <div className="pl-2 border-l-2 border-transparent group-hover:border-zinc-800 transition-colors">
+                <span className="text-[10px] font-bold uppercase tracking-widest opacity-20 mb-2 block">{block.type}</span>
+                
+                {block.type === 'paragraph' ? (
+                  <AutoTextArea 
+                    value={block.content} 
+                    onChange={(val: string) => updateBlock(block.id, val)}
+                    placeholder="Tell your story..." 
+                  />
+                ) : block.type === 'heading' ? (
+                  <input 
+                    className="w-full bg-transparent text-2xl md:text-3xl font-bold outline-none placeholder:opacity-20"
+                    value={block.content}
+                    placeholder="Enter subtitle..."
+                    onChange={(e) => updateBlock(block.id, e.target.value)}
+                  />
+                ) : (
+                  <div className="flex flex-col gap-4">
+                    <input 
+                      className="w-full bg-zinc-900/50 border border-zinc-800 p-3 rounded-lg text-sm font-mono outline-none focus:border-blue-500"
+                      value={block.content}
+                      placeholder={`Enter ${block.type} URL or content...`}
+                      onChange={(e) => updateBlock(block.id, e.target.value)}
+                    />
+                    {/* Tiny Preview for Images */}
+                    {block.type === 'image' && block.content && (
+                      <img src={block.content} className="max-h-40 rounded-lg object-cover w-fit border border-zinc-800" alt="Preview" />
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
-            
-            {block.type === 'heading' ? (
-                 <input 
-                 className="w-full bg-transparent text-xl md:text-2xl font-bold outline-none" 
-                 placeholder="Enter Subtitle..."
-                 onChange={(e) => updateBlock(block.id, e.target.value)}
-               />
-            ) : (
-                <textarea 
-                className="w-full bg-transparent mt-1 outline-none min-h-[100px] md:min-h-[80px] resize-y text-base" 
-                placeholder={`Enter ${block.type} content...`}
-                onChange={(e) => updateBlock(block.id, e.target.value)}
-              />
-            )}
-          </div>
-        ))}
-      </div>
+          ))}
 
-      {/* Responsive Toolbar */}
-      <div className="fixed bottom-0 left-0 right-0 md:sticky md:bottom-10 bg-[--background] border-t md:border border-zinc-800 p-4 md:rounded-2xl shadow-2xl z-50">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-4 items-center">
-          
-          {/* Scrollable buttons for mobile */}
-          <div className="flex overflow-x-auto w-full md:w-auto gap-2 pb-2 md:pb-0 no-scrollbar items-center">
-            <span className="text-xs font-bold uppercase opacity-40 mr-2 shrink-0 hidden md:block">Add:</span>
-            <button onClick={() => addBlock('heading')} className="whitespace-nowrap px-3 py-2 bg-zinc-800 rounded-lg text-xs font-medium shrink-0">Subtitle</button>
-            <button onClick={() => addBlock('paragraph')} className="whitespace-nowrap px-3 py-2 bg-zinc-800 rounded-lg text-xs font-medium shrink-0">Paragraph</button>
-            <button onClick={() => addBlock('image')} className="whitespace-nowrap px-3 py-2 bg-zinc-800 rounded-lg text-xs font-medium shrink-0">Image</button>
-            <button onClick={() => addBlock('video')} className="whitespace-nowrap px-3 py-2 bg-zinc-800 rounded-lg text-xs font-medium shrink-0">Video</button>
-            <button onClick={() => addBlock('quote')} className="whitespace-nowrap px-3 py-2 bg-zinc-800 rounded-lg text-xs font-medium shrink-0">Quote</button>
-          </div>
-          
+          {/* ADD BLOCK TRIGGER */}
           <button 
-              onClick={handlePublish} 
-              className="w-full md:w-auto md:ml-auto px-6 py-3 md:py-2 bg-foreground text-background font-bold rounded-xl hover:scale-105 transition-transform text-sm"
+            onClick={() => setIsModalOpen(true)}
+            className="w-full py-16 border-2 border-dashed border-zinc-800/50 rounded-3xl flex flex-col items-center justify-center gap-4 text-zinc-500 hover:text-white hover:border-zinc-600 hover:bg-zinc-900/30 transition-all cursor-pointer group"
           >
-              Publish Post
+            <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-xl">
+              <Plus size={24} />
+            </div>
+            <p className="font-medium">Add content to your post</p>
           </button>
         </div>
+      </div>
+
+      {/* BLOCK SELECTOR MODAL */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="bg-zinc-950 border border-zinc-800 w-full max-w-sm rounded-[32px] p-8 shadow-2xl overflow-hidden relative">
+            <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 text-zinc-500 hover:text-white cursor-pointer">
+              <X size={20} />
+            </button>
+            
+            <h3 className="text-xl font-bold mb-8 tracking-tight italic">Select Block Type</h3>
+            
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { type: 'paragraph', label: 'Text', icon: <FileText size={20} />, color: 'bg-blue-500/10 text-blue-500' },
+                { type: 'heading', label: 'Heading', icon: <Heading size={20} />, color: 'bg-purple-500/10 text-purple-500' },
+                { type: 'image', label: 'Image', icon: <ImageIcon size={20} />, color: 'bg-green-500/10 text-green-500' },
+                { type: 'video', label: 'Video', icon: <Video size={20} />, color: 'bg-red-500/10 text-red-500' },
+                { type: 'quote', label: 'Quote', icon: <Quote size={20} />, color: 'bg-yellow-500/10 text-yellow-500' },
+              ].map((item) => (
+                <button
+                  key={item.type}
+                  onClick={() => addBlock(item.type as BlockType)}
+                  className="flex flex-col items-center gap-3 p-4 rounded-2xl border border-zinc-900 bg-zinc-900/30 hover:bg-zinc-800 transition-all text-center cursor-pointer active:scale-95"
+                >
+                  <div className={`p-3 rounded-xl ${item.color}`}>{item.icon}</div>
+                  <span className="font-bold text-xs uppercase tracking-widest">{item.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* FLOATING ACTION BUTTON */}
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2">
+        <button 
+          onClick={handlePublish}
+          className="bg-white text-black px-10 py-4 rounded-full font-black shadow-2xl flex items-center gap-3 hover:scale-105 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+        >
+          Publish Now <Send size={18} />
+        </button>
       </div>
     </div>
   );

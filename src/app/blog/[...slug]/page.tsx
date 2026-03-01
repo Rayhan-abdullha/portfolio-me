@@ -1,4 +1,3 @@
-
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { BlogBlock } from '@/types/blog';
@@ -9,9 +8,8 @@ interface Props {
 }
 
 export default async function BlogPostPage({ params }: Props) {
-const { slug } = await params;
+  const { slug } = await params;
   
-  // Artificial 500ms delay to show your beautiful skeleton
   const [post] = await Promise.all([
     getPostBySlug(slug),
     new Promise((resolve) => setTimeout(resolve, 300))
@@ -41,12 +39,12 @@ const { slug } = await params;
             <span>{post.readTime}</span>
           </div>
           
-          <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-[1.1] mb-10">
+          <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.1] mb-10">
             {post.title}
           </h1>
 
           {post.coverImage && (
-            <div className="relative aspect-video rounded-3xl overflow-hidden border border-zinc-800/50">
+            <div className="relative aspect-video rounded-3xl overflow-hidden border border-zinc-800/50 shadow-2xl">
               <img 
                 src={post.coverImage} 
                 alt={post.title} 
@@ -62,14 +60,18 @@ const { slug } = await params;
             switch (block.type) {
               case 'heading':
                 return (
-                  <h2 key={block.id} className="text-3xl font-bold mt-16 mb-4 pt-4 tracking-tight">
+                  <h2 key={block.id} className="text-2xl md:text-3xl font-bold mt-16 mb-4 pt-4 tracking-tight">
                     {block.content}
                   </h2>
                 );
 
               case 'paragraph':
                 return (
-                  <p key={block.id} className="text-lg leading-relaxed opacity-90 font-serif_ (or sans)">
+                  <p 
+                    key={block.id} 
+                    /* whitespace-pre-wrap is the key here to show line breaks */
+                    className="text-md md:text-lg leading-relaxed opacity-90 whitespace-pre-wrap font-sans"
+                  >
                     {block.content}
                   </p>
                 );
@@ -79,35 +81,26 @@ const { slug } = await params;
                   <figure key={block.id} className="my-12">
                     <img 
                       src={block.content} 
-                      alt={block.caption || ""} 
-                      className="rounded-2xl w-full border border-zinc-800/30" 
+                      alt="" 
+                      className="rounded-2xl w-full border border-zinc-800/30 shadow-lg" 
                     />
-                    {block.caption && (
-                      <figcaption className="text-center text-sm mt-4 opacity-50 italic">
-                        {block.caption}
-                      </figcaption>
-                    )}
                   </figure>
                 );
 
               case 'quote':
                 return (
-                  <blockquote key={block.id} className="border-l-4 border-foreground pl-8 py-2 my-12 italic">
-                    <p className="text-2xl font-medium leading-snug">"{block.content}"</p>
-                    {block.author && (
-                      <cite className="block mt-4 text-sm not-italic opacity-60">— {block.author}</cite>
-                    )}
+                  <blockquote key={block.id} className="border-l-4 border-blue-600 pl-8 py-2 my-12 italic bg-zinc-900/30 rounded-r-2xl">
+                    <p className="text-lg md:text-2xl font-medium leading-snug whitespace-pre-wrap">"{block.content}"</p>
                   </blockquote>
                 );
 
               case 'video':
-                // Logic to ensure YouTube links are embed-friendly
                 const videoId = block.content.includes('v=') 
                   ? block.content.split('v=')[1].split('&')[0] 
                   : block.content.split('/').pop();
                 
                 return (
-                  <div key={block.id} className="my-12 aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl">
+                  <div key={block.id} className="my-12 aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl border border-zinc-800">
                     <iframe
                       src={`https://www.youtube.com/embed/${videoId}`}
                       className="w-full h-full"
@@ -123,7 +116,6 @@ const { slug } = await params;
           })}
         </section>
 
-        {/* Footer */}
         <footer className="mt-20 pt-10 border-t border-zinc-800/50">
           <p className="text-sm opacity-50">
             Thanks for reading. If you enjoyed this post, feel free to share it.

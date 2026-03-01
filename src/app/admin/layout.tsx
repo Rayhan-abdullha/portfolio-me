@@ -46,7 +46,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <aside className="hidden md:flex w-72 border-r border-zinc-800 flex-col sticky top-0 h-screen p-6 bg-zinc-950/50 backdrop-blur-md">
         <div className="flex items-center gap-3 mb-12 px-2">
           <div className="w-8 h-8 bg-blue-600 rounded-lg" />
-          <span className="font-black text-xl tracking-tighter">PORTFOLIO.OS</span>
+          <span className="font-black text-xl tracking-tighter">Blog Admin</span>
         </div>
         <nav className="space-y-2 flex-1">
           {navItems.map((item) => {
@@ -63,14 +63,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     {/* --- Mobile Bottom Menu Button --- */}
     <button
       onClick={() => setIsMobileMenuOpen(true)}
-      className="md:hidden fixed bottom-6 right-6 z-50 w-14 h-14 bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-transform"
-      aria-label="Open Menu"
-    >
-      <Menu size={26} />
-    </button>
-    <button
-      onClick={() => setIsMobileMenuOpen(true)}
-      className="md:hidden fixed bottom-6 right-6 z-50 w-14 h-14 bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-transform"
+      className="cursor-pointer md:hidden fixed bottom-36 right-4 z-50 w-14 h-14 bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-transform"
       aria-label="Open Menu"
     >
       <Menu size={26} />
@@ -83,14 +76,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       />
 
       <aside 
-        className={`fixed top-0 left-0 bottom-0 w-[280px] bg-zinc-950 border-r border-zinc-800 z-50 p-6 transition-transform duration-300 ease-in-out md:hidden ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
+        className={`fixed top-0 left-0 bottom-0 w-[280px] bg-zinc-950 border-r border-zinc-800 z-[999] p-6 transition-transform duration-300 ease-in-out md:hidden ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <div className="flex items-center justify-between mb-10">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 bg-blue-600 rounded" />
             <span className="font-black text-xl tracking-tighter italic">ADMIN</span>
           </div>
-          <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-zinc-500">
+          <button onClick={() => setIsMobileMenuOpen(false)} className="cursor-pointer p-2 text-zinc-500 hover:text-zinc-300 transition-colors" aria-label="Close Menu">
             <X size={24} />
           </button>
         </div>

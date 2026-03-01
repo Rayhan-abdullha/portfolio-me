@@ -2,6 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import { BlogPost } from '@/types/blog';
+import crypto from 'crypto';
 
 // Using a constant for the directory path
 const POSTS_DIR = path.join(process.cwd(), 'content/posts');
@@ -33,6 +34,10 @@ export async function getAllPosts(): Promise<BlogPost[]> {
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+  if (!slug) {
+    const id = crypto.randomBytes(4).toString('hex'); // Generate a random slug if none provided
+    slug = `untitled-${id}`; // Default slug if none provided
+  }
   try {
     const filePath = path.join(POSTS_DIR, `${slug}.json`);
     if (!fs.existsSync(filePath)) return null;

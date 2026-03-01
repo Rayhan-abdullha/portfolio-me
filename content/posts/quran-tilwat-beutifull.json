@@ -1,0 +1,21 @@
+{
+  "id": "1772360876169",
+  "title": "Quran Tilwat Beutifull",
+  "slug": "quran-tilwat-beutifull",
+  "coverImage": "https://modulex.com/wp-content/uploads/2022/10/Modulex-Blog-Thumbnail-Image.jpg",
+  "date": "Mar 1, 2026",
+  "readTime": "1 min",
+  "excerpt": "",
+  "blocks": [
+    {
+      "id": "1772360828016",
+      "type": "video",
+      "content": "https://www.youtube.com/watch?v=5drUL9GmruE"
+    },
+    {
+      "id": "1772360834448",
+      "type": "quote",
+      "content": "tilwat"
+    }
+  ]
+}
