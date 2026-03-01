@@ -18,5 +18,5 @@ export interface BlogPost {
   excerpt: string;
   blocks: BlogBlock[];
   category: string;
-  readCount: number;
+  readCount?: number;
 }

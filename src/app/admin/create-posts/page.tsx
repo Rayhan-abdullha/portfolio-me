@@ -8,6 +8,7 @@ import {
 import { BlogBlock, BlockType, BlogPost } from '@/types/blog';
 import { createBlogAction } from '../action';
 import crypto from 'crypto';
+const categories = ['Health', 'Politics', 'Programming', 'Islamic', 'Sports'];
 
 /**
  * AUTO-EXPANDING TEXTAREA COMPONENT
@@ -45,6 +46,7 @@ export default function UnifiedAdminEditor() {
   const [coverImage, setCoverImage] = useState('');
   const [blocks, setBlocks] = useState<BlogBlock[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [category, setCategory] = useState(categories[0]);
 
   // BLOCK LOGIC
   const addBlock = (type: BlockType) => {
@@ -78,6 +80,7 @@ export default function UnifiedAdminEditor() {
       id: Date.now().toString(),
       title,
       slug,
+      category: category.toLowerCase(),
       coverImage: coverImage || 'https://modulex.com/wp-content/uploads/2022/10/Modulex-Blog-Thumbnail-Image.jpg',
       date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
       readTime: `${Math.ceil(blocks.length * 0.5)} min`,
@@ -99,7 +102,17 @@ export default function UnifiedAdminEditor() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="mb-6 bg-zinc-900 border border-zinc-800 px-4 py-3 rounded-xl text-sm font-semibold outline-none focus:border-blue-500 transition"
+        >
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
         <input 
           className="text-sm md:text-base bg-transparent border-b border-zinc-800/50 w-full mb-12 outline-none pb-2 opacity-50 focus:opacity-100 transition-opacity" 
           placeholder="Paste Cover Image URL (Unsplash/Direct link)..." 
