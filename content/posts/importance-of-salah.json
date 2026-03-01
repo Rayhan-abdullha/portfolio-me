@@ -1,0 +1,16 @@
+ {
+    "id": "1772360417612",
+    "title": "সালাতের গুরুত্ব",
+    "slug": "importance-of-salah",
+    "coverImage": "https://emedia1.nhs.wales/ABUhb/cache/file/32587ACE-9F47-4F07-B9BFB9FCCBCE852C_carouselimage.png",
+    "date": "Mar 9, 2026",
+    "readTime": "2 min",
+    "readCount": 540,
+    "category": "Islamic",
+    "excerpt": "সালাত ইসলামের স্তম্ভ এবং মুমিনের জন্য অপরিহার্য ইবাদত।",
+    "blocks": [
+      { "id": "b22", "type": "paragraph", "content": "সালাত মানুষকে অশ্লীলতা ও অন্যায় থেকে বিরত রাখে।" },
+      { "id": "b23", "type": "heading", "content": "দৈনিক পাঁচ ওয়াক্ত" },
+      { "id": "b24", "type": "paragraph", "content": "প্রতিদিন পাঁচ ওয়াক্ত নামাজ আদায় করা ফরজ।" }
+    ]
+  }

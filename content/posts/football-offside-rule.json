@@ -1,0 +1,16 @@
+  {
+    "id": "1772360417613",
+    "title": "ফুটবলে অফসাইড নিয়ম সহজ ব্যাখ্যা",
+    "slug": "football-offside-rule",
+    "coverImage": "https://emedia1.nhs.wales/ABUhb/cache/file/32587ACE-9F47-4F07-B9BFB9FCCBCE852C_carouselimage.png",
+    "date": "Mar 10, 2026",
+    "readTime": "3 min",
+    "readCount": 380,
+    "category": "Sports",
+    "excerpt": "ফুটবলের অফসাইড নিয়ম অনেকের কাছেই জটিল মনে হয়, সহজভাবে জানুন।",
+    "blocks": [
+      { "id": "b25", "type": "paragraph", "content": "বল পাস করার সময় আক্রমণভাগের খেলোয়াড় যদি শেষ ডিফেন্ডারের সামনে থাকে তবে অফসাইড।" },
+      { "id": "b26", "type": "heading", "content": "কখন অফসাইড হয় না?" },
+      { "id": "b27", "type": "paragraph", "content": "নিজের হাফ থেকে বল পেলে অফসাইড হয় না।" }
+    ]
+  }

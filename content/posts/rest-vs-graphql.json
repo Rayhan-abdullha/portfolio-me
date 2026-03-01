@@ -1,0 +1,16 @@
+{
+    "id": "1772360417610",
+    "title": "REST API vs GraphQL",
+    "slug": "rest-vs-graphql",
+    "coverImage": "https://emedia1.nhs.wales/ABUhb/cache/file/32587ACE-9F47-4F07-B9BFB9FCCBCE852C_carouselimage.png",
+    "date": "Mar 7, 2026",
+    "readTime": "4 min",
+    "readCount": 460,
+    "category": "Programming",
+    "excerpt": "REST এবং GraphQL এর মধ্যে পার্থক্য ও ব্যবহার ক্ষেত্র।",
+    "blocks": [
+      { "id": "b16", "type": "paragraph", "content": "REST একটি রিসোর্স-ভিত্তিক আর্কিটেকচার, GraphQL কুয়েরি-ভিত্তিক।" },
+      { "id": "b17", "type": "heading", "content": "কখন কোনটি ব্যবহার করবেন?" },
+      { "id": "b18", "type": "paragraph", "content": "ডেটা ফ্লেক্সিবিলিটি দরকার হলে GraphQL উপযোগী।" }
+    ]
+  }

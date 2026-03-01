@@ -19,11 +19,8 @@ const Navbar = () => {
                   {item}
                 </a>
               ))}
-            <Link href={`/blog`} className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
-              Blog
-            </Link>
-            <Link  href={`/admin`} className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
-              Admin
+            <Link href={`/blogs`} className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
+              Blogs
             </Link>
             <a href="https://drive.google.com/file/d/1elKi72H6KTHWoo6Wp0BsYeeaAxQlyLYe/view?usp=sharing" target='blank' download className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105">
               <Download size={16} /> Resume
@@ -45,11 +42,8 @@ const Navbar = () => {
                 <a href="#projects" className="text-sm font-medium text-gray-400 hover:text-white transition-colors" onClick={() => setIsMenuOpen(false)}>Projects</a>
                 <a href="#skills" className="text-sm font-medium text-gray-400 hover:text-white transition-colors" onClick={() => setIsMenuOpen(false)}>Skills</a>
                 <a href="#about" className="text-sm font-medium text-gray-400 hover:text-white transition-colors" onClick={() => setIsMenuOpen(false)}>About</a>
-                <Link href={`/blog`} className="text-sm font-medium text-gray-400 hover:text-white transition-colors" onClick={() => setIsMenuOpen(false)}>
-                  Blog
-              </Link>
-              <Link  href={`/admin`} className="text-sm font-medium text-gray-400 hover:text-white transition-colors" onClick={() => setIsMenuOpen(false)}>
-                Admin
+                <Link href={`/blogs`} className="text-sm font-medium text-gray-400 hover:text-white transition-colors" onClick={() => setIsMenuOpen(false)}>
+                  Blogs
               </Link>
                 <a href='https://drive.google.com/file/d/1elKi72H6KTHWoo6Wp0BsYeeaAxQlyLYe/view?usp=sharing' target='blank' className="bg-blue-600 px-4 py-2 rounded-2xl flex items-center justify-center gap-2">
                   <Download size={20} /> Resume

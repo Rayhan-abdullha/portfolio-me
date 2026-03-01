@@ -1,0 +1,16 @@
+ {
+    "id": "1772360417609",
+    "title": "JavaScript এ Closure কী?",
+    "slug": "javascript-closure",
+    "coverImage": "https://emedia1.nhs.wales/ABUhb/cache/file/32587ACE-9F47-4F07-B9BFB9FCCBCE852C_carouselimage.png",
+    "date": "Mar 6, 2026",
+    "readTime": "5 min",
+    "readCount": 520,
+    "category": "Programming",
+    "excerpt": "Closure হলো JavaScript এর শক্তিশালী একটি কনসেপ্ট যা স্কোপের সাথে সম্পর্কিত।",
+    "blocks": [
+      { "id": "b13", "type": "paragraph", "content": "Closure তখন তৈরি হয় যখন একটি ফাংশন তার লেক্সিক্যাল স্কোপ মনে রাখে।" },
+      { "id": "b14", "type": "heading", "content": "উদাহরণ" },
+      { "id": "b15", "type": "paragraph", "content": "একটি ফাংশনের ভিতরে আরেকটি ফাংশন তৈরি করলে Closure কাজ করে।" }
+    ]
+  }

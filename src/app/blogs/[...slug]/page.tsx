@@ -20,11 +20,11 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   return (
-    <main className="min-h-screen bg-[--background] text-[--foreground] pt-30 pb-20 px-6">
+    <main className="min-h-screen bg-[--background] text-[--foreground] pt-25 md:pt-30 pb-20 px-6">
       <article className="max-w-3xl mx-auto">
-        <div className="mb-12">
+        <div className="mb-6">
           <Link 
-            href="/blog" 
+            href="/blogs" 
             className="text-sm font-medium opacity-50 hover:opacity-100 transition-opacity flex items-center gap-2"
           >
             ← Back to all posts
@@ -32,17 +32,10 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         {/* Header Section */}
-        <header className="mb-12">
-          <div className="flex items-center gap-3 text-sm mb-6 opacity-60 font-medium">
-            <time>{post.date}</time>
-            <span>•</span>
-            <span>{post.readTime}</span>
-          </div>
-          
-          <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.1] mb-10">
+        <header className="mb-6">
+          <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-[1.1] mb-6">
             {post.title}
           </h1>
-
           {post.coverImage && (
             <div className="relative aspect-video rounded-3xl overflow-hidden border border-zinc-800/50 shadow-2xl">
               <img 
@@ -52,6 +45,11 @@ export default async function BlogPostPage({ params }: Props) {
               />
             </div>
           )}
+          <div className="flex items-center gap-3 text-sm mb-3 mt-6 text-zinc-300 opacity-60 font-medium">
+            <time>{post.date}</time>
+            <span>•</span>
+            <span>{post.readTime}</span>
+          </div>
         </header>
 
         {/* Dynamic Content Renderer */}
@@ -60,7 +58,7 @@ export default async function BlogPostPage({ params }: Props) {
             switch (block.type) {
               case 'heading':
                 return (
-                  <h2 key={block.id} className="text-2xl md:text-3xl font-bold mt-16 mb-4 pt-4 tracking-tight">
+                  <h2 key={block.id} className="text-xl md:text-2xl font-bold mt-8 mb-4 pt-4 tracking-tight">
                     {block.content}
                   </h2>
                 );
@@ -70,7 +68,7 @@ export default async function BlogPostPage({ params }: Props) {
                   <p 
                     key={block.id} 
                     /* whitespace-pre-wrap is the key here to show line breaks */
-                    className="text-md md:text-lg leading-relaxed opacity-90 whitespace-pre-wrap font-sans"
+                    className="text-md leading-relaxed opacity-90 whitespace-pre-wrap font-sans"
                   >
                     {block.content}
                   </p>

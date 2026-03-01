@@ -1,0 +1,16 @@
+{
+    "id": "1772360417607",
+    "title": "বাংলাদেশের নির্বাচন ব্যবস্থা কীভাবে কাজ করে?",
+    "slug": "bangladesh-election-system",
+    "coverImage": "https://emedia1.nhs.wales/ABUhb/cache/file/32587ACE-9F47-4F07-B9BFB9FCCBCE852C_carouselimage.png",
+    "date": "Mar 4, 2026",
+    "readTime": "4 min",
+    "readCount": 410,
+    "category": "Politics",
+    "excerpt": "বাংলাদেশের নির্বাচন প্রক্রিয়া ও সাংবিধানিক কাঠামো সম্পর্কে সংক্ষিপ্ত ধারণা।",
+    "blocks": [
+      { "id": "b7", "type": "paragraph", "content": "বাংলাদেশে সংসদীয় পদ্ধতিতে নির্বাচন অনুষ্ঠিত হয়।" },
+      { "id": "b8", "type": "heading", "content": "নির্বাচন কমিশনের ভূমিকা" },
+      { "id": "b9", "type": "paragraph", "content": "নির্বাচন কমিশন স্বাধীনভাবে নির্বাচন পরিচালনা করে।" }
+    ]
+  }

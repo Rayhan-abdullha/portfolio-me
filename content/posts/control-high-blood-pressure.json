@@ -1,0 +1,16 @@
+{
+    "id": "1772360417606",
+    "title": "হাই ব্লাড প্রেসার নিয়ন্ত্রণের ৫ উপায়",
+    "slug": "control-high-blood-pressure",
+    "coverImage": "https://emedia1.nhs.wales/ABUhb/cache/file/32587ACE-9F47-4F07-B9BFB9FCCBCE852C_carouselimage.png",
+    "date": "Mar 3, 2026",
+    "readTime": "2 min",
+    "readCount": 280,
+    "category": "Health",
+    "excerpt": "লাইফস্টাইল পরিবর্তনের মাধ্যমে হাই ব্লাড প্রেসার নিয়ন্ত্রণ সম্ভব।",
+    "blocks": [
+      { "id": "b4", "type": "paragraph", "content": "লবণ কম খাওয়া, নিয়মিত ব্যায়াম ও ওজন নিয়ন্ত্রণ জরুরি।" },
+      { "id": "b5", "type": "heading", "content": "খাদ্যাভ্যাস পরিবর্তন" },
+      { "id": "b6", "type": "paragraph", "content": "সবজি, ফল ও কম ফ্যাটযুক্ত খাবার বেশি খান।" }
+    ]
+  }

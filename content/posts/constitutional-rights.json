@@ -1,0 +1,16 @@
+{
+    "id": "1772360417608",
+    "title": "সংবিধানের মৌলিক অধিকারগুলো কী?",
+    "slug": "constitutional-rights",
+    "coverImage": "https://emedia1.nhs.wales/ABUhb/cache/file/32587ACE-9F47-4F07-B9BFB9FCCBCE852C_carouselimage.png",
+    "date": "Mar 5, 2026",
+    "readTime": "3 min",
+    "readCount": 295,
+    "category": "Politics",
+    "excerpt": "সংবিধানে বর্ণিত নাগরিকের মৌলিক অধিকারগুলোর সংক্ষিপ্ত আলোচনা।",
+    "blocks": [
+      { "id": "b10", "type": "paragraph", "content": "সংবিধানে মত প্রকাশের স্বাধীনতা, সমতার অধিকারসহ নানা অধিকার নিশ্চিত করা হয়েছে।" },
+      { "id": "b11", "type": "heading", "content": "আইনের দৃষ্টিতে সমতা" },
+      { "id": "b12", "type": "paragraph", "content": "সব নাগরিক আইনের দৃষ্টিতে সমান।" }
+    ]
+  }
